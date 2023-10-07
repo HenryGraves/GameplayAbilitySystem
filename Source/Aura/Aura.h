@@ -4,3 +4,5 @@
 
 #include "CoreMinimal.h"
 
+#define red_highlight 250
+
