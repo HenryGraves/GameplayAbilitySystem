@@ -25,7 +25,6 @@ public:
 protected:
 
 	
-	
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;	
 
