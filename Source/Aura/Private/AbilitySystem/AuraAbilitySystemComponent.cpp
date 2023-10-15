@@ -13,10 +13,5 @@ void UAuraAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* Ability
 {
 	FGameplayTagContainer TagContainer;
 	EffectSpec.GetAllAssetTags(TagContainer);
-
-	for (auto Tag : TagContainer)
-	{
-		// TODO: Broadcast the tag to the widget controller
-		UE_LOG(LogTemp, Warning, TEXT("GE Tag: %s"), *Tag.GetTagName().ToString())
-	}
+	EffectAssetTags.Broadcast(TagContainer);
 }
