@@ -40,6 +40,8 @@ void AAuraCharacter::InitAbilityActorInfo()
 			}
 		}
 	}
+
+	InitializeDefaultAttributes();
 }
 
 void AAuraCharacter::PossessedBy(AController* NewController)
@@ -48,6 +50,15 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 
 	// Init Ability Actor Info for the server
 	InitAbilityActorInfo();
+}
+
+int32 AAuraCharacter::GetPlayerLevel()
+{
+	if (const AAuraPlayerState* PS = GetPlayerState<AAuraPlayerState>())
+	{
+		return PS->GetPlayerLevel();
+	}
+	return -1;
 }
 
 void AAuraCharacter::OnRep_PlayerState()

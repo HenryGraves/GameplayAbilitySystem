@@ -56,7 +56,6 @@ public:
 	FMessageWidgetRowSignature MessageWidgetRow;
 
 protected:
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category=WidgetData)
 	TObjectPtr<UDataTable> MessageWidgetDataTable;
 
