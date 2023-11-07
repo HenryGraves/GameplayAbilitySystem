@@ -3,10 +3,15 @@
 
 #include "Character/AuraCharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "Components/CapsuleComponent.h"
 
 AAuraCharacterBase::AAuraCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
+
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), "WeaponHandSocket");
@@ -48,6 +53,19 @@ void AAuraCharacterBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultPrimaryAttributes, 1);
 	ApplyEffectToSelf(DefaultSecondaryAttributes, 1);
 	ApplyEffectToSelf(DefaultVitalAttributes, 1);
+}
+
+void AAuraCharacterBase::AddCharacterAbilities()
+{
+	if (!HasAuthority()) return;
+
+	UAuraAbilitySystemComponent* AuraASC = CastChecked<UAuraAbilitySystemComponent>(AbilitySystemComponent);
+	AuraASC->AddCharacterAbilities(StartupAbilities);
+}
+
+FVector AAuraCharacterBase::GetCombatSocketLocation()
+{
+	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
 

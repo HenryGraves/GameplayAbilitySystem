@@ -50,6 +50,7 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 
 	// Init Ability Actor Info for the server
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 }
 
 int32 AAuraCharacter::GetPlayerLevel()
